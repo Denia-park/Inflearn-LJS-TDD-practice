@@ -1,12 +1,13 @@
 package com.example.productorderservice.product;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 class ProductServiceTest {
+    @Autowired
     private ProductService productService;
-    private ProductPort productPort;
-    private ProductRepository productRepository;
 
     private static AddProductRequest 상품등록요청_생성() {
         final String name = "상품명";
@@ -14,14 +15,6 @@ class ProductServiceTest {
         final DiscountPolicy discountPolicy = DiscountPolicy.NONE;
         final AddProductRequest request = new AddProductRequest(name, price, discountPolicy);
         return request;
-    }
-
-    @BeforeEach
-    void setUp() {
-        productRepository = new ProductRepository();
-        productPort = new ProductAdapter(productRepository);
-
-        productService = new ProductService(productPort);
     }
 
     @Test
