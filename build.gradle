@@ -29,6 +29,8 @@ dependencies {
 
     testImplementation 'io.rest-assured:rest-assured:4.4.0'
 
+    implementation 'com.google.guava:guava:31.1-jre'
+
 }
 
 tasks.named('test') {
