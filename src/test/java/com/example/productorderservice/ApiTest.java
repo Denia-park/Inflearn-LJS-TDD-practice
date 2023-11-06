@@ -1,4 +1,4 @@
-package com.example.productorderservice.product;
+package com.example.productorderservice;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;

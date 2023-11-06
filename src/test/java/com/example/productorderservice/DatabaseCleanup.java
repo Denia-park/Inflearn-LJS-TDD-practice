@@ -1,4 +1,4 @@
-package com.example.productorderservice.product;
+package com.example.productorderservice;
 
 import com.google.common.base.CaseFormat;
 import org.springframework.beans.factory.InitializingBean;
