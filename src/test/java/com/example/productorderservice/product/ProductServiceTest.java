@@ -1,50 +1,30 @@
 package com.example.productorderservice.product;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class ProductServiceTest {
+    @Autowired
     private ProductService productService;
-    @Mock
-    private StubProductPort productPort;
-
-    @BeforeEach
-    void setUp() {
-        productService = new ProductService(productPort);
-    }
 
     @Test
     void 상품수정() {
+        productService.addProduct(ProductSteps.상품등록요청_생성());
         final Long productId = 1L;
         final UpdateProductRequest request = new UpdateProductRequest("상품수정", 2000, DiscountPolicy.NONE);
-        final Product product = new Product("상품명", 1000, DiscountPolicy.NONE);
-        given(productPort.getProduct(productId)).willReturn(product);
 
         productService.updateProduct(productId, request);
 
-        assertThat(product.getName()).isEqualTo("상품수정");
-        assertThat(product.getPrice()).isEqualTo(2000);
-        assertThat(product.getDiscountPolicy()).isEqualTo(DiscountPolicy.NONE);
-    }
+        final ResponseEntity<GetProductResponse> response = productService.getProduct(productId);
+        final GetProductResponse productResponse = response.getBody();
 
-    private static class StubProductPort implements ProductPort {
-        private Product getProduct_will_return;
-
-        @Override
-        public void save(final Product product) {
-
-        }
-
-        @Override
-        public Product getProduct(final long productId) {
-            return getProduct_will_return;
-        }
+        assertThat(productResponse.name()).isEqualTo("상품수정");
+        assertThat(productResponse.price()).isEqualTo(2000);
+        assertThat(productResponse.discountPolicy()).isEqualTo(DiscountPolicy.NONE);
     }
 }
