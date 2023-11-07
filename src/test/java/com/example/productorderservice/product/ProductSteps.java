@@ -1,5 +1,6 @@
 package com.example.productorderservice.product;
 
+import com.example.productorderservice.order.CreateOrderRequest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
@@ -44,5 +45,21 @@ public class ProductSteps {
                 .patch("/products/{productId}", productId)
                 .then().log().all()
                 .extract();
+    }
+
+    public static ExtractableResponse<Response> 상품주문요청(final CreateOrderRequest request) {
+        return RestAssured.given().log().all()
+                .contentType(ContentType.JSON)
+                .body(request)
+                .when()
+                .post("/orders")
+                .then().log().all()
+                .extract();
+    }
+
+    public static CreateOrderRequest 상품주문요청_생성() {
+        final Long productId = 1L;
+        final int quantity = 2;
+        return new CreateOrderRequest(productId, quantity);
     }
 }
