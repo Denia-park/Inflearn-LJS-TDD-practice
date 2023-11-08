@@ -1,4 +1,4 @@
-package com.example.productorderservice.product;
+package com.example.productorderservice.product.domian;
 
 import lombok.AccessLevel;
 import lombok.Getter;

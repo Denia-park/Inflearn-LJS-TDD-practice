@@ -1,5 +1,6 @@
 package com.example.productorderservice.payment;
 
+import com.example.productorderservice.payment.application.service.PaymentRequest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;

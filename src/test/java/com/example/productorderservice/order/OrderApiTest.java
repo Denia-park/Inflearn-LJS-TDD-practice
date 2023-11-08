@@ -1,8 +1,9 @@
 package com.example.productorderservice.order;
 
 import com.example.productorderservice.ApiTest;
-import com.example.productorderservice.product.ProductService;
+import com.example.productorderservice.order.application.service.OrderService;
 import com.example.productorderservice.product.ProductSteps;
+import com.example.productorderservice.product.application.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
